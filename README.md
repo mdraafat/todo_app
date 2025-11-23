@@ -26,24 +26,18 @@ A simple Flutter todo application with Google authentication.
 
 ### Installation
 
-1. Clone the repository:
-```bash
-git clone <your-repository-url>
-cd todo_app
-```
-
-2. Install dependencies:
+1. Install dependencies:
 ```bash
 flutter pub get
 ```
 
-3. Configure Firebase:
+2. Configure Firebase:
    - Create a new Firebase project
-   - Add your Android/iOS app to the Firebase project
-   - Download and add `google-services.json` (Android) or `GoogleService-Info.plist` (iOS)
+   - Add your Android app to the Firebase project
+   - Download and add `google-services.json` (Android)
    - Enable Google Sign-In in Firebase Authentication
 
-4. Run the app:
+3. Run the app:
 ```bash
 flutter run
 ```
