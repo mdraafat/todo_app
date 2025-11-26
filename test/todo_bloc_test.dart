@@ -5,6 +5,7 @@ import 'package:todo_app/features/auth/domain/repositories/auth_repository.dart'
 import 'package:todo_app/features/todo/domain/entities/todo.dart';
 import 'package:todo_app/features/todo/domain/repositories/todo_repository.dart';
 import 'package:todo_app/features/todo/presentation/bloc/todo_bloc.dart';
+import 'package:todo_app/features/todo/presentation/bloc/todo_event.dart';
 
 // Create mock classes
 class MockTodoRepository extends Mock implements TodoRepository {}

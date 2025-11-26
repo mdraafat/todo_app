@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entities/todo.dart';
 import '../bloc/todo_bloc.dart';
+import '../bloc/todo_event.dart';
 
 class TodoDetailsPage extends StatefulWidget {
   final Todo todo;

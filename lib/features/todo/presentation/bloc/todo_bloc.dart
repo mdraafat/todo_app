@@ -1,85 +1,11 @@
 import 'dart:async';
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../auth/domain/repositories/auth_repository.dart';
 import '../../domain/entities/todo.dart';
 import '../../domain/repositories/todo_repository.dart';
-
-abstract class TodoEvent {}
-
-class LoadTodos extends TodoEvent {}
-
-class AddTodo extends TodoEvent {
-  final String title;
-  final String? description;
-
-  AddTodo({
-    required this.title,
-    this.description,
-  });
-}
-
-class ToggleTodo extends TodoEvent {
-  final String id;
-
-  ToggleTodo(this.id);
-}
-
-class DeleteTodo extends TodoEvent {
-  final String id;
-
-  DeleteTodo(this.id);
-}
-
-class UpdateTodo extends TodoEvent {
-  final String id;
-  final String? title;
-  final String? description;
-
-  UpdateTodo({
-    required this.id,
-    this.title,
-    this.description,
-  });
-}
-
-class TodosUpdated extends TodoEvent {
-  final List<Todo> todos;
-
-  TodosUpdated(this.todos);
-}
-
-class TodoState extends Equatable {
-  final List<Todo> todos;
-  final bool isLoading;
-  final String? errorMessage;
-
-  const TodoState({
-    required this.todos,
-    this.isLoading = false,
-    this.errorMessage,
-  });
-
-  int get completedCount => todos.where((todo) => todo.isCompleted).length;
-  int get totalCount => todos.length;
-
-  TodoState copyWith({
-    List<Todo>? todos,
-    bool? isLoading,
-    String? errorMessage,
-    bool clearError = false,
-  }) {
-    return TodoState(
-      todos: todos ?? this.todos,
-      isLoading: isLoading ?? this.isLoading,
-      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
-    );
-  }
-  
-  @override
-  List<Object?> get props => [todos, isLoading, errorMessage];
-}
+import 'todo_event.dart';
+import 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final TodoRepository todoRepository;
@@ -88,7 +14,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   StreamSubscription? _authSubscription;
 
   TodoBloc({required this.todoRepository, required this.authRepository})
-      : super(TodoState(todos: [])) {
+      : super(const TodoState(todos: [])) {
     on<LoadTodos>(_onLoadTodos);
     on<AddTodo>(_onAddTodo);
     on<ToggleTodo>(_onToggleTodo);
