@@ -1,4 +1,4 @@
-import '../../data/models/user.dart';
+import '../entities/user.dart';
 
 abstract class AuthRepository {
   Future<User?> signInWithGoogle();

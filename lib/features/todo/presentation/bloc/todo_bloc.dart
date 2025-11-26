@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../auth/domain/repositories/auth_repository.dart';
@@ -49,12 +50,12 @@ class TodosUpdated extends TodoEvent {
   TodosUpdated(this.todos);
 }
 
-class TodoState {
+class TodoState extends Equatable {
   final List<Todo> todos;
   final bool isLoading;
   final String? errorMessage;
 
-  TodoState({
+  const TodoState({
     required this.todos,
     this.isLoading = false,
     this.errorMessage,
@@ -67,13 +68,17 @@ class TodoState {
     List<Todo>? todos,
     bool? isLoading,
     String? errorMessage,
+    bool clearError = false,
   }) {
     return TodoState(
       todos: todos ?? this.todos,
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage ?? this.errorMessage,
+      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
     );
   }
+  
+  @override
+  List<Object?> get props => [todos, isLoading, errorMessage];
 }
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {

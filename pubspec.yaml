@@ -38,6 +38,9 @@ dependencies:
   # Unit Testing
   mocktail: ^1.0.4
 
+  # Equitable
+  equatable: ^2.0.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

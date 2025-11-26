@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../todo/data/repositories/todo_repository_impl.dart';
 import '../../../todo/domain/repositories/todo_repository.dart';
-import '../../data/models/user.dart';
+import '../../domain/entities/user.dart';
 import '../../domain/repositories/auth_repository.dart';
 
 abstract class AuthEvent {}
@@ -19,12 +20,12 @@ class AuthUserChanged extends AuthEvent {
 }
 
 
-class AuthState {
+class AuthState extends Equatable {
   final User? user;
   final bool isLoading;
   final String? errorMessage;
 
-  AuthState({
+  const AuthState({
     this.user,
     this.isLoading = false,
     this.errorMessage,
@@ -37,13 +38,17 @@ class AuthState {
     bool? isLoading,
     String? errorMessage,
     bool clearUser = false,
+    bool clearError = false,
   }) {
     return AuthState(
       user: clearUser ? null : (user ?? this.user),
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage ?? this.errorMessage,
+      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
     );
   }
+  
+  @override
+  List<Object?> get props => [user, isLoading, errorMessage];
 }
 
 
