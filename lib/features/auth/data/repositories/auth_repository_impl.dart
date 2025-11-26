@@ -55,7 +55,6 @@ class AuthRepositoryImpl implements AuthRepository {
       id: firebaseUser.uid,
       email: firebaseUser.email ?? '',
       displayName: firebaseUser.displayName,
-      photoUrl: firebaseUser.photoURL,
     );
   }
 }

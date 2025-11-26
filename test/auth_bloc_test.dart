@@ -51,7 +51,6 @@ void main() {
         id: 'google_123',
         email: 'user@gmail.com',
         displayName: 'Test User',
-        photoUrl: 'https://example.com/photo.jpg',
       );
 
       when(() => mockAuthRepository.signInWithGoogle())
